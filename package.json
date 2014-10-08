@@ -1,0 +1,34 @@
+{
+  "name": "threejs-orbitingballs",
+  "version": "1.0.0",
+  "description": "A tiny physics sim of balls orbitting thier center of mass, as a single threejs object.",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Tomasz Dysinski",
+    "email": "oz@bunnybones.com",
+    "url": "https://github.com/bunnybones1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "loadandrunscripts": "^1.0.0",
+    "threejs-managed-view": "^1.0.0"
+  },
+  "scripts": {
+    "test": "beefy test.js --live --open"
+  },
+  "keywords": [
+    "threejs",
+    "balls",
+    "physics",
+    "orbit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bunnybones1/threejs-orbitingballs.git"
+  },
+  "homepage": "https://github.com/bunnybones1/threejs-orbitingballs",
+  "bugs": {
+    "url": "https://github.com/bunnybones1/threejs-orbitingballs/issues"
+  }
+}
