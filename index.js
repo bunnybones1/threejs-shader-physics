@@ -1,3 +1,5 @@
+var THREE = require('three');
+
 function OrbitingBalls(totalBalls, material) {
 	THREE.Object3D.call(this);
 	material = material ? material : new THREE.MeshBasicMaterial();

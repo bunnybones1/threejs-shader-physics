@@ -1,6 +1,6 @@
 {
   "name": "threejs-orbitingballs",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "A tiny physics sim of balls orbitting thier center of mass, as a single threejs object.",
   "main": "index.js",
   "license": "MIT",
@@ -9,10 +9,12 @@
     "email": "oz@bunnybones.com",
     "url": "https://github.com/bunnybones1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "three": "^0.87.1"
+  },
   "devDependencies": {
-    "loadandrunscripts": "^1.0.0",
-    "threejs-managed-view": "^1.0.0"
+    "threejs-managed-view": "^5.0.0",
+    "urlparam": "^1.0.2"
   },
   "scripts": {
     "test": "beefy test.js --live --open"

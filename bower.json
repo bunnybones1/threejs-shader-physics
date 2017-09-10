@@ -1,7 +1,0 @@
-{
-  "name": "threejs-orbitingballs",
-  "version": "1.0.1",
-  "devDependencies": {
-    "three.js": "*"
-  }
-}
