@@ -1,30 +1,30 @@
-var THREE = require('three');
-window.THREE = THREE;
+var three = require('three');
+window.THREE = three;
 var ManagedView = require('threejs-managed-view');
-var OrbitingBalls = require('./');
+var ShaderPhysicsWorldTest = require('./src/meshes/ShaderPhysicsWorldTest');
 var urlparam = require('urlparam');
+
+var camera = new three.OrthographicCamera(-100, 100, -100, 100, -100, 100);
 var view = new ManagedView.View({
+	camera: camera
 	// stats:true
-	skipFrames: 10
 });
 
-//lights
-var light = new THREE.PointLight(0xffffff, 3);
-view.scene.add(light);
-var hemisphereLight = new THREE.HemisphereLight(0x7f6f5f, 0x7f0000);
-view.scene.add(hemisphereLight);
+var test = new ShaderPhysicsWorldTest();
+view.scene.add(test);
 
-var mat = new THREE.MeshPhongMaterial();
-
-var balls = new OrbitingBalls(100, mat);
-view.scene.add(balls);
-
-view.renderManager.onEnterFrame.add(balls.onEnterFrame);
+view.renderManager.onEnterFrame.add(test.onEnterFrame);
 function onEnterFrame() {
-	//put light and camera focus in the center of gravity
-	light.position.copy(balls.centerOfMass);
-	view.camera.lookAt(balls.centerOfMass);
+
 }
 view.renderManager.onEnterFrame.add(onEnterFrame);
+view.onResizeSignal.add(onResize);
+function onResize(w, h) {
+	test.position.x = w * 0.5;
+	test.position.y = h * 0.5;
+}
+setTimeout(function kickStartResize() {
+	onResize(window.innerWidth, window.innerHeight);
+}, 100);
 
 view.renderManager.skipFrames = urlparam('skipFrames', 0);
