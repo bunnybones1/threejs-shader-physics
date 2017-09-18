@@ -6,43 +6,42 @@ var decorateMaterialProtoypeWithUniformGetterSetters = require('./utils/decorate
 var decorateMaterialWithUniforms = require('./utils/decorateMaterialWithUniforms');
 
 var __defaultParams = {
-  size: 4,
-  color: 0xff00ff,
+  map: null,
+  color: new three.Color(0x7f7f7f),
   opacity: 0.5
 };
 
 var __uniformKeys = [
-  'size',
+  'map',
   'color',
   'opacity'
 ];
 
-function SimplePointMaterial(params) {
+function ColorFadeMaterial(params) {
   params = defaults(params, __defaultParams);
   if(!(params.color instanceof three.Color)) {
     params.color = new three.Color(params.color);
   }
+
   decorateMaterialWithUniforms(this, __uniformKeys, params);
+
   THREE.ShaderMaterial.call(
     this,
     {
-      vertexShader: glslify('./shaders/simple.vsh'),
-      fragmentShader: glslify('./shaders/simple.fsh'),
+      vertexShader: glslify('./shaders/colorFade.vsh'),
+      fragmentShader: glslify('./shaders/colorFade.fsh'),
       transparent: true,
-      alphaTest: 0.5,
       depthWrite: false,
       uniforms: this.uniforms
     }
   );
-  var _this = this;
-  __uniformKeys.forEach(function(key) {
-    _this[key] = params[key];
-  });
+  this.opacity = params.opacity;
 }
 
 var __proto = Object.create(three.ShaderMaterial.prototype);
+
+ColorFadeMaterial.prototype = __proto;
+
 decorateMaterialProtoypeWithUniformGetterSetters(__proto, __uniformKeys);
-SimplePointMaterial.prototype = __proto;
 
-
-module.exports = SimplePointMaterial;
+module.exports = ColorFadeMaterial;

@@ -10,7 +10,9 @@ var view = new ManagedView.View({
 	// stats:true
 });
 
-var test = new ShaderPhysicsWorldTest();
+var test = new ShaderPhysicsWorldTest({
+	renderer: view.renderer
+});
 view.scene.add(test);
 
 view.renderManager.onEnterFrame.add(test.onEnterFrame);
@@ -22,9 +24,13 @@ view.onResizeSignal.add(onResize);
 function onResize(w, h) {
 	test.position.x = w * 0.5;
 	test.position.y = h * 0.5;
+	var s = w < h ? w : h;
+	test.scale.set(-s, s, 1);
 }
 setTimeout(function kickStartResize() {
 	onResize(window.innerWidth, window.innerHeight);
 }, 100);
 
-view.renderManager.skipFrames = urlparam('skipFrames', 0);
+setTimeout(function slowDown() {
+	view.renderManager.skipFrames = urlparam('skipFrames', 0);
+}, 1000);
