@@ -36,9 +36,9 @@ function ShaderPhysicsWorldTest(params) {
 
 	var pointsTest = new PositionMapPoints({
 		width: width,
-		height: height,
+		height: 1,
 		size: 4,
-		map: scrollNode.getTexture()
+		map: positionMapNode.getTexture()
 	});
 
 	var dot = new three.Mesh(
@@ -90,7 +90,7 @@ function onEnterFrame() {
 	this.velocityMapNode.onEnterFrame();
 	this.positionMapNode.onEnterFrame();
 	this.positionMapPlane.material.map = this.positionMapNode.getTexture();
-	this.pointsTest.material.map = this.scrollNode.getTexture();
+	this.pointsTest.material.map = this.positionMapNode.getTexture();
 	norm.set(Math.random() - 0.5, Math.random() - 0.5, 0);
 	norm.normalize();
 	this.dot.material.color.setRGB(norm.x * 0.5 + 0.5, norm.y * 0.5 + 0.5, norm.z);
